@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tickets_AdrianMorales", "Tickets_AdrianMorales\Tickets_AdrianMorales.csproj", "{7F924F9D-303E-436A-BC11-6BAF284291F0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7AF43DFB-DC56-4F72-A73B-6C8B3D085BE9} = {7AF43DFB-DC56-4F72-A73B-6C8B3D085BE9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logica", "Logica\Logica.csproj", "{7AF43DFB-DC56-4F72-A73B-6C8B3D085BE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F924F9D-303E-436A-BC11-6BAF284291F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F924F9D-303E-436A-BC11-6BAF284291F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F924F9D-303E-436A-BC11-6BAF284291F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F924F9D-303E-436A-BC11-6BAF284291F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AF43DFB-DC56-4F72-A73B-6C8B3D085BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF43DFB-DC56-4F72-A73B-6C8B3D085BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF43DFB-DC56-4F72-A73B-6C8B3D085BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF43DFB-DC56-4F72-A73B-6C8B3D085BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97B179D1-62D3-4B5E-B63E-84E275518CBA}
+	EndGlobalSection
+EndGlobal
