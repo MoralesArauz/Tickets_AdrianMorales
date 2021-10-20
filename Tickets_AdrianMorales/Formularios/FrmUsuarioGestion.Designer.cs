@@ -32,20 +32,20 @@ namespace Tickets_AdrianMorales.Formularios
             this.TxtBuscar = new System.Windows.Forms.TextBox();
             this.DgvListaUsusarios = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TxtIDUsuario = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.TxtNombre = new System.Windows.Forms.TextBox();
-            this.TxtCedula = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TxtTelefono = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TxtEmail = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.CbRol = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.TxtContrasenia = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.CbRol = new System.Windows.Forms.ComboBox();
+            this.TxtEmail = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TxtTelefono = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TxtCedula = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TxtNombre = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.TxtIDUsuario = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.BtnAgregar = new System.Windows.Forms.Button();
             this.BtnModificar = new System.Windows.Forms.Button();
             this.BtnEliminar = new System.Windows.Forms.Button();
@@ -97,86 +97,23 @@ namespace Tickets_AdrianMorales.Formularios
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Detalles del Usuario";
             // 
-            // label1
+            // CbRol
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Cód. Usuario";
+            this.CbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CbRol.FormattingEnabled = true;
+            this.CbRol.Location = new System.Drawing.Point(484, 107);
+            this.CbRol.Name = "CbRol";
+            this.CbRol.Size = new System.Drawing.Size(262, 21);
+            this.CbRol.TabIndex = 13;
             // 
-            // TxtIDUsuario
+            // label7
             // 
-            this.TxtIDUsuario.Location = new System.Drawing.Point(81, 17);
-            this.TxtIDUsuario.Name = "TxtIDUsuario";
-            this.TxtIDUsuario.ReadOnly = true;
-            this.TxtIDUsuario.Size = new System.Drawing.Size(100, 20);
-            this.TxtIDUsuario.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Nombre";
-            // 
-            // TxtNombre
-            // 
-            this.TxtNombre.Location = new System.Drawing.Point(81, 48);
-            this.TxtNombre.Name = "TxtNombre";
-            this.TxtNombre.Size = new System.Drawing.Size(262, 20);
-            this.TxtNombre.TabIndex = 3;
-            // 
-            // TxtCedula
-            // 
-            this.TxtCedula.Location = new System.Drawing.Point(81, 74);
-            this.TxtCedula.Name = "TxtCedula";
-            this.TxtCedula.Size = new System.Drawing.Size(262, 20);
-            this.TxtCedula.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 74);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Cédula";
-            // 
-            // TxtTelefono
-            // 
-            this.TxtTelefono.Location = new System.Drawing.Point(81, 100);
-            this.TxtTelefono.Name = "TxtTelefono";
-            this.TxtTelefono.Size = new System.Drawing.Size(262, 20);
-            this.TxtTelefono.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(10, 100);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Teléfono";
-            // 
-            // TxtEmail
-            // 
-            this.TxtEmail.Location = new System.Drawing.Point(484, 45);
-            this.TxtEmail.Name = "TxtEmail";
-            this.TxtEmail.Size = new System.Drawing.Size(262, 20);
-            this.TxtEmail.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(399, 48);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Email / Usuario";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(451, 107);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(23, 13);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Rol";
             // 
             // TxtContrasenia
             // 
@@ -194,23 +131,86 @@ namespace Tickets_AdrianMorales.Formularios
             this.label6.TabIndex = 10;
             this.label6.Text = "Contraseña";
             // 
-            // label7
+            // TxtEmail
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(451, 107);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(23, 13);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Rol";
+            this.TxtEmail.Location = new System.Drawing.Point(484, 45);
+            this.TxtEmail.Name = "TxtEmail";
+            this.TxtEmail.Size = new System.Drawing.Size(262, 20);
+            this.TxtEmail.TabIndex = 9;
             // 
-            // CbRol
+            // label5
             // 
-            this.CbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.CbRol.FormattingEnabled = true;
-            this.CbRol.Location = new System.Drawing.Point(484, 107);
-            this.CbRol.Name = "CbRol";
-            this.CbRol.Size = new System.Drawing.Size(262, 21);
-            this.CbRol.TabIndex = 13;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(399, 48);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(79, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Email / Usuario";
+            // 
+            // TxtTelefono
+            // 
+            this.TxtTelefono.Location = new System.Drawing.Point(81, 100);
+            this.TxtTelefono.Name = "TxtTelefono";
+            this.TxtTelefono.Size = new System.Drawing.Size(262, 20);
+            this.TxtTelefono.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Teléfono";
+            // 
+            // TxtCedula
+            // 
+            this.TxtCedula.Location = new System.Drawing.Point(81, 74);
+            this.TxtCedula.Name = "TxtCedula";
+            this.TxtCedula.Size = new System.Drawing.Size(262, 20);
+            this.TxtCedula.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(10, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Cédula";
+            // 
+            // TxtNombre
+            // 
+            this.TxtNombre.Location = new System.Drawing.Point(81, 48);
+            this.TxtNombre.Name = "TxtNombre";
+            this.TxtNombre.Size = new System.Drawing.Size(262, 20);
+            this.TxtNombre.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Nombre";
+            // 
+            // TxtIDUsuario
+            // 
+            this.TxtIDUsuario.Location = new System.Drawing.Point(81, 17);
+            this.TxtIDUsuario.Name = "TxtIDUsuario";
+            this.TxtIDUsuario.ReadOnly = true;
+            this.TxtIDUsuario.Size = new System.Drawing.Size(100, 20);
+            this.TxtIDUsuario.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Cód. Usuario";
             // 
             // BtnAgregar
             // 
@@ -223,6 +223,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnAgregar.TabIndex = 3;
             this.BtnAgregar.Text = "AGREGAR";
             this.BtnAgregar.UseVisualStyleBackColor = false;
+            this.BtnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
             // BtnModificar
             // 
@@ -275,6 +276,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestión de Usuarios";
+            this.Load += new System.EventHandler(this.FrmUsuarioGestion_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DgvListaUsusarios)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

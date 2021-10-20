@@ -94,6 +94,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.gestiónDeUsuariosToolStripMenuItem1.Name = "gestiónDeUsuariosToolStripMenuItem1";
             this.gestiónDeUsuariosToolStripMenuItem1.Size = new System.Drawing.Size(258, 22);
             this.gestiónDeUsuariosToolStripMenuItem1.Text = "Gestión de Usuarios";
+            this.gestiónDeUsuariosToolStripMenuItem1.Click += new System.EventHandler(this.gestiónDeUsuariosToolStripMenuItem1_Click);
             // 
             // gestiónDeClientesToolStripMenuItem1
             // 

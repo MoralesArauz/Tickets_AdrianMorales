@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,30 @@ namespace Logica.Models
 
         public bool Agregar()
         {
-            return false;
+            bool R = false;
+
+            Conexion MiCnnAdd = new Conexion();
+
+            // Agregar los parámetros para el SP
+
+            MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Cedula", this.Cedula));
+            MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Nombre", this.Nombre));
+            MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Telefono", this.Telefono));
+            MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Email", this.Email));
+            // TODO: Encriptar contraseña
+            MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Contrasennia", this.Contrasennia));
+            MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@IdRol", this.MiRol.IDUsurioRol));
+
+            // 1.6.3 y 1.6.4
+            int resultado = MiCnnAdd.DMLUpdateDeleteInsert("SPUsuarioAgregar");
+
+            // 1.6.5
+            if (resultado > 0)
+            {
+                R = true;
+            }
+            
+            return R;
         }
 
         public bool Editar()
@@ -50,19 +74,53 @@ namespace Logica.Models
             return false;
         }
 
-       private Usuario consultarPorID(int ID)
+       public Usuario consultarPorID(int ID)
         {
             return null;
         }
 
-       private bool ConsultarPorCedula(string cedula)
+       public bool ConsultarPorCedula(string cedula)
         {
-            return false;
+
+            bool R = false;
+
+            // Paso 1.3.1 y 1.3.2
+            Conexion MiConexion = new Conexion();
+
+            //En este caso y de forma didactica se decidió implementar un parámetro para la cédula
+            //este valor debe agregarse como parámetro que debe llegar hasta el SP.
+            MiConexion.ListadoDeParametros.Add(new SqlParameter("@Cedula",cedula));
+
+            // Paso 1.3.3 y 1.3.4
+            DataTable retorno = MiConexion.DMLSelect("SPUsuarioConsultarPorCedula");
+
+            // Paso 1.3.5
+            if (retorno != null && retorno.Rows.Count > 0)
+            {
+                R = true;
+            }
+
+            return R;
         }
 
-        private bool ConsultarPorEmail()
+        public bool ConsultarPorEmail()
         {
-            return false;
+            bool R = false;
+            // Paso 1.4.1 y 1.4.2
+            Conexion MiCnn = new Conexion();
+            //agregar el parámetro que debe llegar con el valor del email a consultar
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@Email", this.Email));
+            // 1.4.3 y 1.4.4
+            DataTable resultado = MiCnn.DMLSelect("SPUsuarioConsultarPorEmail");
+
+
+            // 1.4.5
+            if (resultado != null && resultado.Rows.Count > 0)
+            {
+                R = true;
+            }
+
+            return R;
         }
 
         public DataTable Listar(bool verActivos = true)

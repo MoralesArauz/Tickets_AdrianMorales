@@ -33,5 +33,12 @@ namespace Tickets_AdrianMorales.Formularios
 
             Application.Exit();
         }
+
+        private void gestiónDeUsuariosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // Mostramos formulario global de gestión de usuarios
+
+            Commons.ObjetosGlobales.FormularioGestionDeUsuarios.Show();
+        }
     }
 }

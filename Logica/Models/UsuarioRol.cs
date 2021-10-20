@@ -41,11 +41,16 @@ namespace Logica.Models
             return false;
         }
 
-        DataTable Listar()
+        public DataTable Listar()
         {
-            // SEQ: SDUsurioRolListar
+            
             DataTable R = new DataTable();
+            // SEQ: SDUsurioRolListar Paso 2.1 y 2.2
+            Conexion MiConexion = new Conexion();
 
+            // Paso 2.3
+            R = MiConexion.DMLSelect("SPUsuarioRolListar");
+            // Paso 2.4
             return R;
         }
     }
