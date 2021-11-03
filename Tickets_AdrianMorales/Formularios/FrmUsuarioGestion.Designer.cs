@@ -50,6 +50,11 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnModificar = new System.Windows.Forms.Button();
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnLimpiar = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListaUsusarios)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -76,6 +81,11 @@ namespace Tickets_AdrianMorales.Formularios
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.CbRol);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.TxtContrasenia);
@@ -101,10 +111,11 @@ namespace Tickets_AdrianMorales.Formularios
             // 
             this.CbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CbRol.FormattingEnabled = true;
-            this.CbRol.Location = new System.Drawing.Point(484, 107);
+            this.CbRol.Location = new System.Drawing.Point(508, 107);
             this.CbRol.Name = "CbRol";
             this.CbRol.Size = new System.Drawing.Size(262, 21);
             this.CbRol.TabIndex = 13;
+            this.CbRol.SelectionChangeCommitted += new System.EventHandler(this.CbRol_SelectionChangeCommitted);
             // 
             // label7
             // 
@@ -117,10 +128,11 @@ namespace Tickets_AdrianMorales.Formularios
             // 
             // TxtContrasenia
             // 
-            this.TxtContrasenia.Location = new System.Drawing.Point(484, 74);
+            this.TxtContrasenia.Location = new System.Drawing.Point(508, 71);
             this.TxtContrasenia.Name = "TxtContrasenia";
             this.TxtContrasenia.Size = new System.Drawing.Size(262, 20);
             this.TxtContrasenia.TabIndex = 11;
+            this.TxtContrasenia.Leave += new System.EventHandler(this.TxtContrasenia_Leave);
             // 
             // label6
             // 
@@ -133,10 +145,11 @@ namespace Tickets_AdrianMorales.Formularios
             // 
             // TxtEmail
             // 
-            this.TxtEmail.Location = new System.Drawing.Point(484, 45);
+            this.TxtEmail.Location = new System.Drawing.Point(508, 45);
             this.TxtEmail.Name = "TxtEmail";
             this.TxtEmail.Size = new System.Drawing.Size(262, 20);
             this.TxtEmail.TabIndex = 9;
+            this.TxtEmail.Leave += new System.EventHandler(this.TxtEmail_Leave);
             // 
             // label5
             // 
@@ -153,6 +166,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.TxtTelefono.Name = "TxtTelefono";
             this.TxtTelefono.Size = new System.Drawing.Size(262, 20);
             this.TxtTelefono.TabIndex = 7;
+            this.TxtTelefono.Leave += new System.EventHandler(this.TxtTelefono_Leave);
             // 
             // label4
             // 
@@ -169,6 +183,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.TxtCedula.Name = "TxtCedula";
             this.TxtCedula.Size = new System.Drawing.Size(262, 20);
             this.TxtCedula.TabIndex = 5;
+            this.TxtCedula.Leave += new System.EventHandler(this.TxtCedula_Leave);
             // 
             // label3
             // 
@@ -185,6 +200,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.TxtNombre.Name = "TxtNombre";
             this.TxtNombre.Size = new System.Drawing.Size(262, 20);
             this.TxtNombre.TabIndex = 3;
+            this.TxtNombre.Leave += new System.EventHandler(this.TxtNombre_Leave);
             // 
             // label2
             // 
@@ -258,6 +274,62 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnLimpiar.TabIndex = 6;
             this.BtnLimpiar.Text = "Limpiar";
             this.BtnLimpiar.UseVisualStyleBackColor = false;
+            this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Red;
+            this.label8.Location = new System.Drawing.Point(60, 48);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(16, 20);
+            this.label8.TabIndex = 14;
+            this.label8.Text = "*";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Red;
+            this.label9.Location = new System.Drawing.Point(59, 74);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(16, 20);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "*";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(480, 46);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(16, 20);
+            this.label10.TabIndex = 16;
+            this.label10.Text = "*";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(480, 74);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(16, 20);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "*";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(480, 105);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(16, 20);
+            this.label12.TabIndex = 18;
+            this.label12.Text = "*";
             // 
             // FrmUsuarioGestion
             // 
@@ -308,5 +380,10 @@ namespace Tickets_AdrianMorales.Formularios
         private System.Windows.Forms.Button BtnModificar;
         private System.Windows.Forms.Button BtnEliminar;
         private System.Windows.Forms.Button BtnLimpiar;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
     }
 }
