@@ -18,9 +18,8 @@ namespace Tickets_AdrianMorales.Formularios
         // debería contener toda la funcionalidad que se requiere para cumplir
         // los requerimientos Funcionales
         private Logica.Models.Usuario MiUsuarioLocal { get; set; }
-
-
-
+        private DataTable ListarUsuarios { get; set; }
+        private DataTable ListarUsuariosConFlitro { get; set; }
         public FrmUsuarioGestion()
         {
             InitializeComponent();
@@ -29,6 +28,8 @@ namespace Tickets_AdrianMorales.Formularios
             //SDUsuarioRolListar Paso 1 y 1.1
             //SDUsuarioAgregar Paso 1.1 y 1.2
             MiUsuarioLocal = new Logica.Models.Usuario();
+            ListarUsuarios = new DataTable();
+            ListarUsuariosConFlitro = new DataTable();
         }
 
         private void FrmUsuarioGestion_Load(object sender, EventArgs e)
@@ -37,6 +38,16 @@ namespace Tickets_AdrianMorales.Formularios
             // primero vamos a llenar la info de los tipos de roles que existen en BD
             CargarComboRoles();
 
+            // Cargar la lista de Usuarios
+            LlenarListaUsuarios();
+        }
+
+        private void LlenarListaUsuarios()
+        {
+            ListarUsuarios = MiUsuarioLocal.Listar();
+            DgvListaUsusarios.DataSource = ListarUsuarios;
+
+            DgvListaUsusarios.ClearSelection();
         }
 
         private void CargarComboRoles()
@@ -84,8 +95,7 @@ namespace Tickets_AdrianMorales.Formularios
             {
                 mensajeError += "Debe escoger un Rol.\n";
             }
-            if (string.IsNullOrEmpty(mensajeError) &&
-                MiUsuarioLocal.MiRol.IDUsurioRol > 0
+            if (string.IsNullOrEmpty(mensajeError)
                 )
             {
                 // Si se cumplen los parámetros de validación se pasa el valor de R a true
@@ -141,6 +151,7 @@ namespace Tickets_AdrianMorales.Formularios
                         MessageBox.Show("Usuario Agregado Correctamente!","Éxito",MessageBoxButtons.OK);
                         //TODO: Se procede a limpiar el formulario y a recargar la lista de usuarios en el DataGrid
                         LimpiarFormulario();
+                        LlenarListaUsuarios();
                     }
                     else
                     {
@@ -153,55 +164,69 @@ namespace Tickets_AdrianMorales.Formularios
 
         private void TxtNombre_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TxtNombre.Text.Trim()))
-            {
-                MiUsuarioLocal.Nombre = TxtNombre.Text.Trim();
-            }
+            MiUsuarioLocal.Nombre = TxtNombre.Text.Trim();   
         }
 
         private void TxtCedula_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TxtCedula.Text.Trim()))
-            {
-                MiUsuarioLocal.Cedula = TxtCedula.Text.Trim();
-            }
+            MiUsuarioLocal.Cedula = TxtCedula.Text.Trim();
         }
 
         private void TxtTelefono_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TxtTelefono.Text.Trim()))
-            {
-                MiUsuarioLocal.Telefono = TxtTelefono.Text.Trim();
-            }
+            
+            MiUsuarioLocal.Telefono = TxtTelefono.Text.Trim();
         }
 
         private void TxtEmail_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TxtEmail.Text.Trim()))
-            {
-                MiUsuarioLocal.Email = TxtEmail.Text.Trim();
-            }
+            MiUsuarioLocal.Email = TxtEmail.Text.Trim();
         }
 
         private void TxtContrasenia_Leave(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(TxtContrasenia.Text.Trim()))
-            {
-                MiUsuarioLocal.Contrasennia = TxtContrasenia.Text.Trim();
-            }
+            MiUsuarioLocal.Contrasennia = TxtContrasenia.Text.Trim(); 
         }
 
         private void CbRol_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            if (CbRol.SelectedIndex >= 0)
+            if (CbRol.SelectedIndex>=0)
             {
                 MiUsuarioLocal.MiRol.IDUsurioRol = Convert.ToInt32(CbRol.SelectedValue);
             }
+            else
+            {
+                CbRol.SelectedIndex = 0;
+            }
+            
+            
         }
 
         private void BtnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarFormulario();
+        }
+
+        private void DgvListaUsusarios_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (DgvListaUsusarios.SelectedRows.Count == 1)
+            {
+                LimpiarFormulario();
+
+                DataGridViewRow MiFila = DgvListaUsusarios.SelectedRows[0];
+
+                int CodigoUsuario = Convert.ToInt32(MiFila.Cells["CIDUsuario"].Value);
+
+                MiUsuarioLocal = MiUsuarioLocal.consultarPorID(CodigoUsuario);
+
+                TxtIDUsuario.Text = MiUsuarioLocal.IDUsuario.ToString();
+                TxtNombre.Text = MiUsuarioLocal.Nombre;
+                TxtCedula.Text = MiUsuarioLocal.Cedula;
+                TxtTelefono.Text = MiUsuarioLocal.Telefono;
+                TxtEmail.Text = MiUsuarioLocal.Email;
+                //TxtContrasenia.Text = MiUsuarioLocal.Contrasennia;
+                CbRol.SelectedValue = MiUsuarioLocal.MiRol.IDUsurioRol;
+            }
         }
     }
 }

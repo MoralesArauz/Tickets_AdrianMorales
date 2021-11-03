@@ -55,6 +55,11 @@ namespace Tickets_AdrianMorales.Formularios
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.CIDUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CCedula = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CUsuarioRolDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListaUsusarios)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -73,11 +78,22 @@ namespace Tickets_AdrianMorales.Formularios
             this.DgvListaUsusarios.AllowUserToAddRows = false;
             this.DgvListaUsusarios.AllowUserToDeleteRows = false;
             this.DgvListaUsusarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DgvListaUsusarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CIDUsuario,
+            this.CCedula,
+            this.CNombre,
+            this.CEmail,
+            this.CUsuarioRolDescripcion});
             this.DgvListaUsusarios.Location = new System.Drawing.Point(12, 49);
+            this.DgvListaUsusarios.MultiSelect = false;
             this.DgvListaUsusarios.Name = "DgvListaUsusarios";
             this.DgvListaUsusarios.ReadOnly = true;
+            this.DgvListaUsusarios.RowHeadersVisible = false;
+            this.DgvListaUsusarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DgvListaUsusarios.Size = new System.Drawing.Size(776, 219);
             this.DgvListaUsusarios.TabIndex = 1;
+            this.DgvListaUsusarios.VirtualMode = true;
+            this.DgvListaUsusarios.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvListaUsusarios_RowEnter);
             // 
             // groupBox1
             // 
@@ -237,7 +253,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnAgregar.Name = "BtnAgregar";
             this.BtnAgregar.Size = new System.Drawing.Size(75, 23);
             this.BtnAgregar.TabIndex = 3;
-            this.BtnAgregar.Text = "AGREGAR";
+            this.BtnAgregar.Text = "Agregar";
             this.BtnAgregar.UseVisualStyleBackColor = false;
             this.BtnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
@@ -331,6 +347,44 @@ namespace Tickets_AdrianMorales.Formularios
             this.label12.TabIndex = 18;
             this.label12.Text = "*";
             // 
+            // CIDUsuario
+            // 
+            this.CIDUsuario.DataPropertyName = "IDUsuario";
+            this.CIDUsuario.HeaderText = "Código";
+            this.CIDUsuario.Name = "CIDUsuario";
+            this.CIDUsuario.ReadOnly = true;
+            // 
+            // CCedula
+            // 
+            this.CCedula.DataPropertyName = "Cedula";
+            this.CCedula.HeaderText = "Cédula";
+            this.CCedula.Name = "CCedula";
+            this.CCedula.ReadOnly = true;
+            // 
+            // CNombre
+            // 
+            this.CNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CNombre.DataPropertyName = "Nombre";
+            this.CNombre.HeaderText = "Nombre";
+            this.CNombre.Name = "CNombre";
+            this.CNombre.ReadOnly = true;
+            // 
+            // CEmail
+            // 
+            this.CEmail.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CEmail.DataPropertyName = "Email";
+            this.CEmail.HeaderText = "Email/Nombre Usuario";
+            this.CEmail.Name = "CEmail";
+            this.CEmail.ReadOnly = true;
+            this.CEmail.Width = 200;
+            // 
+            // CUsuarioRolDescripcion
+            // 
+            this.CUsuarioRolDescripcion.DataPropertyName = "UsuarioRolDescripcion";
+            this.CUsuarioRolDescripcion.HeaderText = "Rol";
+            this.CUsuarioRolDescripcion.Name = "CUsuarioRolDescripcion";
+            this.CUsuarioRolDescripcion.ReadOnly = true;
+            // 
             // FrmUsuarioGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -385,5 +439,10 @@ namespace Tickets_AdrianMorales.Formularios
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CIDUsuario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CCedula;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CNombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CUsuarioRolDescripcion;
     }
 }
