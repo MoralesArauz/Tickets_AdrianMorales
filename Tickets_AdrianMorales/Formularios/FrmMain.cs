@@ -37,6 +37,8 @@ namespace Tickets_AdrianMorales.Formularios
         private void gestiónDeUsuariosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // Mostramos formulario global de gestión de usuarios
+            // Esto es por el Dispose que sucede cuando cierro el formulario
+            Commons.ObjetosGlobales.FormularioGestionDeUsuarios = new FrmUsuarioGestion();
 
             Commons.ObjetosGlobales.FormularioGestionDeUsuarios.Show();
         }

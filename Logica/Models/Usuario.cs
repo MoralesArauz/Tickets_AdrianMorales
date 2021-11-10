@@ -28,8 +28,11 @@ namespace Logica.Models
             MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Nombre", this.Nombre));
             MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Telefono", this.Telefono));
             MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Email", this.Email));
-            // TODO: Encriptar contraseña
-            MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Contrasennia", this.Contrasennia));
+            // Encriptar contraseña
+            Crypto MiEncriptador = new Crypto();
+            string PassEcriptado = MiEncriptador.EncriptarEnUnSentido(this.Contrasennia);
+
+            MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@Contrasennia", PassEcriptado));
             MiCnnAdd.ListadoDeParametros.Add(new SqlParameter("@IdRol", this.MiRol.IDUsurioRol));
 
             // 1.6.3 y 1.6.4
@@ -46,12 +49,56 @@ namespace Logica.Models
 
         public bool Editar()
         {
-            return false;
+            bool R = false;
+
+            Conexion MiCnn = new Conexion();
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@Cedula", this.Cedula));
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@Nombre", this.Nombre));
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@Telefono", this.Telefono));
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("Email", this.Email));
+
+
+            // Encriptar contraseña
+            Crypto MiEncriptador = new Crypto();
+
+            string PassEncriptado = string.Empty;
+
+            if (!string.IsNullOrEmpty(this.Contrasennia))
+            {
+                PassEncriptado = MiEncriptador.EncriptarEnUnSentido(this.Contrasennia);
+            }
+            
+
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@Contrasennia", PassEncriptado));
+
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@IdRol", this.MiRol.IDUsurioRol));
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@ID", this.IDUsuario));
+
+            int retorno = MiCnn.DMLUpdateDeleteInsert("SPUsuarioEditar");
+
+            if (retorno == 1)
+            {
+                R = true;
+            }
+
+            return R;
         }
 
         public bool Eliminar()
         {
-            return false;
+            bool R = false;
+
+            Conexion MiCnn = new Conexion();
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@ID", this.IDUsuario));
+
+            int retorno = MiCnn.DMLUpdateDeleteInsert("SPUsuarioEliminar");
+
+            if (retorno == 1)
+            {
+                R = true;
+            }
+
+            return R;
         }
 
         // Atributos propios de la clase
@@ -95,7 +142,9 @@ namespace Logica.Models
                 R.Cedula = Convert.ToString(Fila["Cedula"]);
                 R.Telefono = Convert.ToString(Fila["Telefono"]);
                 R.Email = Convert.ToString(Fila["Email"]);
-                R.Contrasennia = Convert.ToString(Fila["Contrasennia"]);
+                // Aquí hay un conflicto para poder editar la contraseña
+                //R.Contrasennia = string.Empty;
+                //R.Contrasennia = Convert.ToString(Fila["Contrasennia"]);
                 R.MiRol.IDUsurioRol = Convert.ToInt32(Fila["IDUsuarioRol"]);
             }
 
@@ -149,8 +198,9 @@ namespace Logica.Models
         public DataTable Listar(bool verActivos = true)
         {
             DataTable R = new DataTable();
-
+            bool VerActivos = true;
             Conexion MiCnn = new Conexion();
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@VerActivos", VerActivos));
 
             R = MiCnn.DMLSelect("SPUsuariosListar");
 
