@@ -129,38 +129,44 @@ namespace Tickets_AdrianMorales.Formularios
             // La asignación de valores a atributos se realiza en tiempo real,
             // usaremos el evento para almacenar el dato del atributo al objeto local
             // Es importante que todos tengan datos antes de proceder
-            if (ValidarDatosRequeridos())
+            /* if (ValidarDatosRequeridos())
+             {
+                 // Paso 1.3 y 1.3.6
+                 bool OkCedula = MiUsuarioLocal.ConsultarPorCedula(MiUsuarioLocal.Cedula);
+                 // Paso 1.4 y 1.4.6
+                 bool OkEmail = MiUsuarioLocal.ConsultarPorEmail();
+
+                 //1.5
+                 if (!OkCedula && !OkEmail)
+                 {
+                     // Si no existe la cedula y si no existe el email, entonces agregamos el Usuario
+
+                     //1.6
+                     // Solicita si se quiere eliminar el usuario realmente
+                     DialogResult Continuar = MessageBox.Show(string.Format("Está seguro que quiere Agregar al usuario {0}", MiUsuarioLocal.Nombre), "Eliminar Usuario", MessageBoxButtons.YesNo);
+
+                     if (Continuar == DialogResult.Yes)
+                     {
+                         if (MiUsuarioLocal.Agregar())
+                         {
+                             MessageBox.Show("Usuario Agregado Correctamente!", "Éxito", MessageBoxButtons.OK);
+                             //TODO: Se procede a limpiar el formulario y a recargar la lista de usuarios en el DataGrid
+                             LimpiarFormulario();
+                             LlenarListaUsuarios();
+                         }
+                         else
+                         {
+                             MessageBox.Show("Ha ocurrido un error y no se ha guardado el usuario", "Error", MessageBoxButtons.OK);
+                         }
+                     }
+                 }
+
+             }*/
+
+
+            if (Commons.ObjetosGlobales.ValidarPassword(TxtContrasenia.Text))
             {
-                // Paso 1.3 y 1.3.6
-                bool OkCedula = MiUsuarioLocal.ConsultarPorCedula(MiUsuarioLocal.Cedula);
-                // Paso 1.4 y 1.4.6
-                bool OkEmail = MiUsuarioLocal.ConsultarPorEmail();
-
-                //1.5
-                if (!OkCedula && !OkEmail)
-                {
-                    // Si no existe la cedula y si no existe el email, entonces agregamos el Usuario
-
-                    //1.6
-                    // Solicita si se quiere eliminar el usuario realmente
-                    DialogResult Continuar = MessageBox.Show(string.Format("Está seguro que quiere Agregar al usuario {0}", MiUsuarioLocal.Nombre), "Eliminar Usuario", MessageBoxButtons.YesNo);
-
-                    if (Continuar == DialogResult.Yes)
-                    {
-                        if (MiUsuarioLocal.Agregar())
-                        {
-                            MessageBox.Show("Usuario Agregado Correctamente!", "Éxito", MessageBoxButtons.OK);
-                            //TODO: Se procede a limpiar el formulario y a recargar la lista de usuarios en el DataGrid
-                            LimpiarFormulario();
-                            LlenarListaUsuarios();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Ha ocurrido un error y no se ha guardado el usuario", "Error", MessageBoxButtons.OK);
-                        }
-                    }
-                }
-                      
+                MessageBox.Show("Contraseña válida", "Correcto", MessageBoxButtons.OK);
             }
             
         }

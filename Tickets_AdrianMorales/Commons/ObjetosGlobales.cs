@@ -30,6 +30,15 @@ namespace Tickets_AdrianMorales.Commons
 		[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
        + @"([a-zA-Z0-9]+[\w-]+\.)+[a-zA-Z]{1}[a-zA-Z0-9-]{1,23})$";
 
+
+        // Expresiones regulares para validar la contraseña
+        static Regex tieneNumeros = new Regex(@"[0-9]+");
+        static Regex extraeNumeros = new Regex(@"\d+", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        static Regex tieneMayusculas = new Regex(@"[A-Z]+");
+        static Regex limiteCaracteres = new Regex(@".{8,15}");
+        static Regex tieneMinusculas = new Regex(@"[a-z]+");
+        static Regex tieneSimbolos = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
         public static bool ValidarEmail(string email)
         {
             if (email != null)
@@ -40,6 +49,77 @@ namespace Tickets_AdrianMorales.Commons
             { return false; }
 
         }
+
+        //Verifica si la contraseña tiene números pares
+        public static bool ValidarNumerosPares(string contrasenia)
+        {
+            bool R = false;
+
+            if (!tieneNumeros.IsMatch(contrasenia))
+            {
+                return true;
+            }
+
+            MatchCollection collection = extraeNumeros.Matches(contrasenia);//en el texto que vamos a buscar
+            foreach (Match m in collection)
+            {
+                //por cada nro obtenido con la expresion regular,comparamos si es par o no
+                if (Int32.Parse(m.Value) % 2 == 0)
+                    // Encontró un número par
+                    return true;
+            }
+
+            return R;
+        }
+
+        /*
+            Mínimo 8 caracteres. 
+            Debe tener mayúsculas. 
+            Debe tener minúsculas. 
+            Debe tener caracteres especiales como : !"·$%&/()=
+            Debe tener números impares. 
+         */
+        public static bool ValidarPassword(string contrasennia)
+        {
+            
+            if (string.IsNullOrWhiteSpace(contrasennia))
+            {
+                throw new Exception("Contraseña vacía");
+            }
+
+          
+            if (!tieneMinusculas.IsMatch(contrasennia))
+            {
+                MessageBox.Show("La contraseña debe tener al menos una letra minúsculas", "Error", MessageBoxButtons.OK);
+                return false;
+            }
+            else if (!tieneMayusculas.IsMatch(contrasennia))
+            {
+                MessageBox.Show("La contraseña debe tener letras mayúsculas", "Error", MessageBoxButtons.OK);
+                return false;
+            }
+            else if (!limiteCaracteres.IsMatch(contrasennia))
+            {
+                MessageBox.Show("La contraseña debe tener entre 8 y 12 caracteres", "Error", MessageBoxButtons.OK);
+                return false;
+            }
+            else if (ValidarNumerosPares(contrasennia))
+            {
+                MessageBox.Show("La contraseña debe tener solo números impares", "Error", MessageBoxButtons.OK);
+                return false;
+            }
+
+            else if (!tieneSimbolos.IsMatch(contrasennia))
+            {
+                MessageBox.Show("La contraseña debe tener símbolos", "Error", MessageBoxButtons.OK);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
 
         private static char DecimalSeparator = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString());
 
