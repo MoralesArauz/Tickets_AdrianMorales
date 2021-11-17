@@ -101,6 +101,23 @@ namespace Logica.Models
             return R;
         }
 
+        public bool Activar()
+        {
+            bool R = false;
+
+            Conexion MiCnn = new Conexion();
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@ID", this.IDUsuario));
+
+            int retorno = MiCnn.DMLUpdateDeleteInsert("SPUsuarioActivar");
+
+            if (retorno == 1)
+            {
+                R = true;
+            }
+
+            return R;
+        }
+
         // Atributos propios de la clase
         public int IDUsuario { get; set; }
         public string CodigoRecuperacion { get; set; }
@@ -195,12 +212,13 @@ namespace Logica.Models
             return R;
         }
 
-        public DataTable Listar(bool verActivos = true)
+        public DataTable Listar(bool VerActivos, string FiltroBusqueda = "")
         {
             DataTable R = new DataTable();
-            bool VerActivos = true;
+            
             Conexion MiCnn = new Conexion();
             MiCnn.ListadoDeParametros.Add(new SqlParameter("@VerActivos", VerActivos));
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@Filtro", FiltroBusqueda));
 
             R = MiCnn.DMLSelect("SPUsuariosListar");
 
@@ -215,6 +233,39 @@ namespace Logica.Models
         public bool CambiarPassword(int id, string nuevaContrasennia)
         {
             return false;
+        }
+
+        public Usuario ValidarIngreso(string user, string password)
+        {
+            Usuario R = new Usuario();
+
+            Conexion MiCnn = new Conexion();
+            Crypto MiEncriptador = new Crypto();
+
+            string PassEncriptado = MiEncriptador.EncriptarEnUnSentido(password);
+
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@user", user));
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@pass", PassEncriptado));
+
+            DataTable DatosUsuario = new DataTable();
+            DatosUsuario = MiCnn.DMLSelect("SPUsuarioValidarIngreso");
+
+            if (DatosUsuario != null && DatosUsuario.Rows.Count == 1)
+            {
+                DataRow Fila = DatosUsuario.Rows[0];
+
+                R.IDUsuario = Convert.ToInt32(Fila["ID"]); ;
+                R.Nombre = Convert.ToString(Fila["Nombre"]);
+                R.Cedula = Convert.ToString(Fila["Cedula"]);
+                R.Telefono = Convert.ToString(Fila["Telefono"]);
+                R.Email = Convert.ToString(Fila["Email"]);
+                // Aquí hay un conflicto para poder editar la contraseña
+                R.Contrasennia = string.Empty;
+                //R.Contrasennia = Convert.ToString(Fila["Contrasennia"]);
+                R.MiRol.IDUsurioRol = Convert.ToInt32(Fila["IDUsuarioRol"]);
+            }
+
+            return R;
         }
     }
 }

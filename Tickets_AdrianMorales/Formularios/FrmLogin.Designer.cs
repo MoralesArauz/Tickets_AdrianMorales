@@ -37,6 +37,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.label2 = new System.Windows.Forms.Label();
             this.LblRecuperarContrasenia = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.BtnIngresoDirecto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +63,7 @@ namespace Tickets_AdrianMorales.Formularios
             // BtnIngresar
             // 
             this.BtnIngresar.BackColor = System.Drawing.Color.Green;
+            this.BtnIngresar.FlatAppearance.BorderSize = 0;
             this.BtnIngresar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnIngresar.ForeColor = System.Drawing.Color.White;
@@ -76,6 +78,7 @@ namespace Tickets_AdrianMorales.Formularios
             // BtnCancelar
             // 
             this.BtnCancelar.BackColor = System.Drawing.Color.Brown;
+            this.BtnCancelar.FlatAppearance.BorderSize = 0;
             this.BtnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCancelar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCancelar.ForeColor = System.Drawing.Color.White;
@@ -136,6 +139,22 @@ namespace Tickets_AdrianMorales.Formularios
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
             // 
+            // BtnIngresoDirecto
+            // 
+            this.BtnIngresoDirecto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BtnIngresoDirecto.FlatAppearance.BorderSize = 0;
+            this.BtnIngresoDirecto.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnIngresoDirecto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnIngresoDirecto.ForeColor = System.Drawing.Color.White;
+            this.BtnIngresoDirecto.Location = new System.Drawing.Point(336, 12);
+            this.BtnIngresoDirecto.Name = "BtnIngresoDirecto";
+            this.BtnIngresoDirecto.Size = new System.Drawing.Size(109, 23);
+            this.BtnIngresoDirecto.TabIndex = 8;
+            this.BtnIngresoDirecto.Text = "Ingreso Directo";
+            this.BtnIngresoDirecto.UseVisualStyleBackColor = false;
+            this.BtnIngresoDirecto.Visible = false;
+            this.BtnIngresoDirecto.Click += new System.EventHandler(this.BtnIngresoDirecto_Click);
+            // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -144,6 +163,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.BackgroundImage = global::Tickets_AdrianMorales.Properties.Resources.backgroundLogin;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(449, 209);
+            this.Controls.Add(this.BtnIngresoDirecto);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblRecuperarContrasenia);
             this.Controls.Add(this.label2);
@@ -153,9 +173,11 @@ namespace Tickets_AdrianMorales.Formularios
             this.Controls.Add(this.TxtPassword);
             this.Controls.Add(this.TxtEmail);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.KeyPreview = true;
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmLogin";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmLogin_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -172,5 +194,6 @@ namespace Tickets_AdrianMorales.Formularios
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel LblRecuperarContrasenia;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button BtnIngresoDirecto;
     }
 }

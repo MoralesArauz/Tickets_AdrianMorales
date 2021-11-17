@@ -38,7 +38,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.CUsuarioRolDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.LblPassRequerido = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -60,6 +60,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnModificar = new System.Windows.Forms.Button();
             this.BtnEliminar = new System.Windows.Forms.Button();
             this.BtnLimpiar = new System.Windows.Forms.Button();
+            this.CboxVerActivos = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListaUsusarios)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +72,9 @@ namespace Tickets_AdrianMorales.Formularios
             this.TxtBuscar.Name = "TxtBuscar";
             this.TxtBuscar.Size = new System.Drawing.Size(225, 22);
             this.TxtBuscar.TabIndex = 0;
+            this.TxtBuscar.Text = "Buscar...";
             this.TxtBuscar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtBuscar.TextChanged += new System.EventHandler(this.TxtBuscar_TextChanged);
             // 
             // DgvListaUsusarios
             // 
@@ -136,7 +139,7 @@ namespace Tickets_AdrianMorales.Formularios
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.LblPassRequerido);
             this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
@@ -172,16 +175,16 @@ namespace Tickets_AdrianMorales.Formularios
             this.label12.TabIndex = 18;
             this.label12.Text = "*";
             // 
-            // label11
+            // LblPassRequerido
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Red;
-            this.label11.Location = new System.Drawing.Point(480, 74);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(16, 20);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "*";
+            this.LblPassRequerido.AutoSize = true;
+            this.LblPassRequerido.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblPassRequerido.ForeColor = System.Drawing.Color.Red;
+            this.LblPassRequerido.Location = new System.Drawing.Point(480, 74);
+            this.LblPassRequerido.Name = "LblPassRequerido";
+            this.LblPassRequerido.Size = new System.Drawing.Size(16, 20);
+            this.LblPassRequerido.TabIndex = 17;
+            this.LblPassRequerido.Text = "*";
             // 
             // label10
             // 
@@ -391,11 +394,25 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnLimpiar.UseVisualStyleBackColor = false;
             this.BtnLimpiar.Click += new System.EventHandler(this.BtnLimpiar_Click);
             // 
+            // CboxVerActivos
+            // 
+            this.CboxVerActivos.AutoSize = true;
+            this.CboxVerActivos.Checked = true;
+            this.CboxVerActivos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CboxVerActivos.Location = new System.Drawing.Point(667, 17);
+            this.CboxVerActivos.Name = "CboxVerActivos";
+            this.CboxVerActivos.Size = new System.Drawing.Size(124, 17);
+            this.CboxVerActivos.TabIndex = 7;
+            this.CboxVerActivos.Text = "Ver Usuarios Activos";
+            this.CboxVerActivos.UseVisualStyleBackColor = true;
+            this.CboxVerActivos.Click += new System.EventHandler(this.CboxVerActivos_Click);
+            // 
             // FrmUsuarioGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 512);
+            this.Controls.Add(this.CboxVerActivos);
             this.Controls.Add(this.BtnLimpiar);
             this.Controls.Add(this.BtnEliminar);
             this.Controls.Add(this.BtnModificar);
@@ -441,7 +458,7 @@ namespace Tickets_AdrianMorales.Formularios
         private System.Windows.Forms.Button BtnEliminar;
         private System.Windows.Forms.Button BtnLimpiar;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label LblPassRequerido;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
@@ -450,5 +467,6 @@ namespace Tickets_AdrianMorales.Formularios
         private System.Windows.Forms.DataGridViewTextBoxColumn CNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn CEmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn CUsuarioRolDescripcion;
+        private System.Windows.Forms.CheckBox CboxVerActivos;
     }
 }

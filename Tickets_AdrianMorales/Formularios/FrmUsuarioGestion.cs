@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using System.Linq;
+using System.Drawing;
 
 namespace Tickets_AdrianMorales.Formularios
 {
@@ -13,7 +15,7 @@ namespace Tickets_AdrianMorales.Formularios
         // los requerimientos Funcionales
         private Logica.Models.Usuario MiUsuarioLocal { get; set; }
         private DataTable ListarUsuarios { get; set; }
-        private DataTable ListarUsuariosConFlitro { get; set; }
+
         public FrmUsuarioGestion()
         {
             InitializeComponent();
@@ -23,7 +25,6 @@ namespace Tickets_AdrianMorales.Formularios
             //SDUsuarioAgregar Paso 1.1 y 1.2
             MiUsuarioLocal = new Logica.Models.Usuario();
             ListarUsuarios = new DataTable();
-            ListarUsuariosConFlitro = new DataTable();
         }
 
         private void FrmUsuarioGestion_Load(object sender, EventArgs e)
@@ -33,13 +34,27 @@ namespace Tickets_AdrianMorales.Formularios
             CargarComboRoles();
 
             // Cargar la lista de Usuarios
-            LlenarListaUsuarios();
+            LlenarListaUsuarios(CboxVerActivos.Checked);
             LimpiarFormulario();
         }
 
-        private void LlenarListaUsuarios()
+        private void LlenarListaUsuarios(bool VerActivos, string FiltroBusqueda = "")
         {
-            ListarUsuarios = MiUsuarioLocal.Listar();
+
+            // El cuadro de busqueda tiene escrito la palabra "Buscar..." para no usar un 
+            // label. Debemos considerar esa palabra como no válida, y cualquier otro texto como el parámetro
+            // el parámetro de búsqueda
+
+            string Filtro = "";
+
+            if (!string.IsNullOrEmpty(FiltroBusqueda) && 
+                FiltroBusqueda != "Buscar...")
+            {
+                Filtro = FiltroBusqueda;
+            }
+
+
+            ListarUsuarios = MiUsuarioLocal.Listar(VerActivos,FiltroBusqueda);
             DgvListaUsusarios.DataSource = ListarUsuarios;
 
             DgvListaUsusarios.ClearSelection();
@@ -66,7 +81,7 @@ namespace Tickets_AdrianMorales.Formularios
         // Esta funcion valida los datos requeridos según se diseñó el modelo
         // lógico y físico de base de datos
         // Debería avisar al Usuario que dato está haciendo falta.
-        private bool ValidarDatosRequeridos()
+        private bool ValidarDatosRequeridos(bool ValidarPassword = true)
         {
             bool R = false;
             string mensajeError = "";
@@ -82,10 +97,15 @@ namespace Tickets_AdrianMorales.Formularios
             {
                 mensajeError += "El campo Email es obligatorio.\n";
             }
-            if (string.IsNullOrEmpty(MiUsuarioLocal.Contrasennia))
+
+            // La contraseña no se debe validar si estamos en modo edición
+            // y no hemos escrito algo en la contraseña
+            if (ValidarPassword && string.IsNullOrEmpty(MiUsuarioLocal.Contrasennia))
             {
-                mensajeError += "El campo Contraseña es obligatorio.\n";
+                 mensajeError += "El campo Contraseña es obligatorio.\n";
             }
+
+            
             if (MiUsuarioLocal.MiRol.IDUsurioRol <=0)
             {
                 mensajeError += "Debe escoger un Rol.\n";
@@ -106,7 +126,7 @@ namespace Tickets_AdrianMorales.Formularios
             return R;
         }
 
-        private void LimpiarFormulario()
+        private void LimpiarFormulario(bool LimpiarBusqueda=true)
         {
             // Se procede a limpiar los datos de los controles del formulario
             TxtIDUsuario.Clear();
@@ -117,6 +137,10 @@ namespace Tickets_AdrianMorales.Formularios
             TxtEmail.Clear();
             CbRol.SelectedIndex = -1;
 
+            if (LimpiarBusqueda)
+            {
+                TxtBuscar.Text = "Buscar...";
+            }
             // Al reinstanciar el objeto local se eliminan todos los datos de los atributos
             MiUsuarioLocal = new Logica.Models.Usuario();
 
@@ -125,11 +149,11 @@ namespace Tickets_AdrianMorales.Formularios
 
         private void BtnAgregar_Click(object sender, EventArgs e)
         {
-
+            
             // La asignación de valores a atributos se realiza en tiempo real,
             // usaremos el evento para almacenar el dato del atributo al objeto local
             // Es importante que todos tengan datos antes de proceder
-            /* if (ValidarDatosRequeridos())
+            if (ValidarDatosRequeridos())
              {
                  // Paso 1.3 y 1.3.6
                  bool OkCedula = MiUsuarioLocal.ConsultarPorCedula(MiUsuarioLocal.Cedula);
@@ -139,11 +163,16 @@ namespace Tickets_AdrianMorales.Formularios
                  //1.5
                  if (!OkCedula && !OkEmail)
                  {
-                     // Si no existe la cedula y si no existe el email, entonces agregamos el Usuario
+                    if (Commons.ObjetosGlobales.ValidarPassword(TxtContrasenia.Text))
+                    {
+                        MessageBox.Show("Contraseña válida", "Correcto", MessageBoxButtons.OK);
+                        TxtContrasenia.Focus();
+                    }
+                    // Si no existe la cedula y si no existe el email, entonces agregamos el Usuario
 
-                     //1.6
-                     // Solicita si se quiere eliminar el usuario realmente
-                     DialogResult Continuar = MessageBox.Show(string.Format("Está seguro que quiere Agregar al usuario {0}", MiUsuarioLocal.Nombre), "Eliminar Usuario", MessageBoxButtons.YesNo);
+                    //1.6
+                    // Solicita si se quiere eliminar el usuario realmente
+                    DialogResult Continuar = MessageBox.Show(string.Format("Está seguro que quiere Agregar al usuario {0}", MiUsuarioLocal.Nombre), "Eliminar Usuario", MessageBoxButtons.YesNo);
 
                      if (Continuar == DialogResult.Yes)
                      {
@@ -152,7 +181,7 @@ namespace Tickets_AdrianMorales.Formularios
                              MessageBox.Show("Usuario Agregado Correctamente!", "Éxito", MessageBoxButtons.OK);
                              //TODO: Se procede a limpiar el formulario y a recargar la lista de usuarios en el DataGrid
                              LimpiarFormulario();
-                             LlenarListaUsuarios();
+                             LlenarListaUsuarios(CboxVerActivos.Checked);
                          }
                          else
                          {
@@ -160,15 +189,20 @@ namespace Tickets_AdrianMorales.Formularios
                          }
                      }
                  }
+                else
+                {
+                    // En caso de que ya exista la cédula o el email, debe informarse al usuario
+                    if (OkCedula)
+                    {
+                        MessageBox.Show("Ya existe un usuario con la cédula digitada", "Error de Validación", MessageBoxButtons.OK);
+                    }
+                    if (OkEmail)
+                    {
+                        MessageBox.Show("Ya existe un usuario con el email digitado", "Error de Validación", MessageBoxButtons.OK);
+                    }
+                }
 
-             }*/
-
-
-            if (Commons.ObjetosGlobales.ValidarPassword(TxtContrasenia.Text))
-            {
-                MessageBox.Show("Contraseña válida", "Correcto", MessageBoxButtons.OK);
-            }
-            
+             }  
         }
 
         private void TxtNombre_Leave(object sender, EventArgs e)
@@ -233,7 +267,7 @@ namespace Tickets_AdrianMorales.Formularios
             // Según el diagrama de casos de usu expandido, se debe consultar por el
             // ID antes de proceder con el proceso de actualización
             // Esto debería estar explicado en el diagrama de secuencia correspondiente
-            if (ValidarDatosRequeridos())
+            if (ValidarDatosRequeridos(false))
             {
                 // Si se cumplen los datos mínimos, se procede
                 // Uso un objeto temporal para no tocar el usuario local y poder evaluar
@@ -241,7 +275,7 @@ namespace Tickets_AdrianMorales.Formularios
                 Logica.Models.Usuario ObjUsuario = MiUsuarioLocal.consultarPorID(MiUsuarioLocal.IDUsuario);
 
                 // Solicita si se quiere eliminar el usuario realmente
-                DialogResult Continuar = MessageBox.Show(string.Format("Está seguro que quiere eliminar al usuario {0}",ObjUsuario.Nombre), "Eliminar Usuario", MessageBoxButtons.YesNo);
+                DialogResult Continuar = MessageBox.Show(string.Format("Está seguro que quiere modificar al usuario {0}",ObjUsuario.Nombre), "Modificar Usuario", MessageBoxButtons.YesNo);
 
                 if (Continuar == DialogResult.Yes)
                 {
@@ -256,7 +290,7 @@ namespace Tickets_AdrianMorales.Formularios
                             MessageBox.Show("El usuario se ha actualizado correctamente", "Correcto", MessageBoxButtons.OK);
 
                             LimpiarFormulario();
-                            LlenarListaUsuarios();
+                            LlenarListaUsuarios(CboxVerActivos.Checked);
 
                         }
                         else
@@ -276,41 +310,88 @@ namespace Tickets_AdrianMorales.Formularios
             // Según el diagrama de casos de usu expandido, se debe consultar por el
             // ID antes de proceder con el proceso de actualización
             // Esto debería estar explicado en el diagrama de secuencia correspondiente
-            if (ValidarDatosRequeridos())
+            
+           // Uso un objeto temporal para no tocar el usuario local y poder evaluar
+           // (si tiene datos en los atributos) que el usuario existe aun en la BD
+           Logica.Models.Usuario ObjUsuarioTemporal = MiUsuarioLocal.consultarPorID(MiUsuarioLocal.IDUsuario);
+
+            //Si se muestran los usuarios eliminados el boton debe funcionar para Activar de nuego
+            //al usuario y mostrarlo de nuevo en los activos.
+            //1. Crear el SPUsuarioActivar.
+            //2. Modificar la clase usuario para que tenga una función de activación de usuario.
+            //3. Modificar el código de este botón para que tengan ambas funcionalidades
+            if (CboxVerActivos.Checked)
             {
-                // Uso un objeto temporal para no tocar el usuario local y poder evaluar
-                // (si tiene datos en los atributos) que el usuario existe aun en la BD
-                Logica.Models.Usuario ObjUsuarioTemporal = MiUsuarioLocal.consultarPorID(MiUsuarioLocal.IDUsuario);
-                
-                // Solicita si se quiere eliminar el usuario realmente
-                DialogResult Continuar = MessageBox.Show("Está seguro que quiere eliminar al usuario " + ObjUsuarioTemporal.Nombre, "Eliminar Usuario", MessageBoxButtons.YesNo);
+                EliminarUsuario(ObjUsuarioTemporal);
+            }
+            else
+            {
+                ActivarUsuario(ObjUsuarioTemporal);
+            }
+        }
 
-                if (Continuar == DialogResult.Yes)
+        private void EliminarUsuario(Logica.Models.Usuario ObjUsuarioTemporal)
+        {
+            // Solicita si se quiere eliminar el usuario realmente
+            DialogResult Continuar = MessageBox.Show("Está seguro que quiere eliminar al usuario " + ObjUsuarioTemporal.Nombre, "Eliminar Usuario", MessageBoxButtons.YesNo);
+
+            if (Continuar == DialogResult.Yes)
+            {
+                // Si se cumplen los datos mínimos, se procede
+                if (ObjUsuarioTemporal.IDUsuario > 0)
                 {
-                    // Si se cumplen los datos mínimos, se procede
-                    if (ObjUsuarioTemporal.IDUsuario > 0)
+                    // Si el ID(o cualquier atributo obligatorio) tiene datos, se puede
+                    // asegurar que el usuario existe y se puede proceder con el delete
+
+                    if (MiUsuarioLocal.Eliminar())
                     {
-                        // Si el ID(o cualquier atributo obligatorio) tiene datos, se puede
-                        // asegurar que el usuario existe y se puede proceder con el delete
+                        LimpiarFormulario();
+                        LlenarListaUsuarios(CboxVerActivos.Checked);
+                        // Se muestra mensaje de éxito y se actualiza la lista
+                        MessageBox.Show("El usuario " + ObjUsuarioTemporal.Nombre + " se ha eliminado correctamente", "Correcto", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error y no se eliminó el usuario", "incorrecto", MessageBoxButtons.OK);
 
-                        if (MiUsuarioLocal.Eliminar())
-                        {
-                            LimpiarFormulario();
-                            LlenarListaUsuarios();
-                            // Se muestra mensaje de éxito y se actualiza la lista
-                            MessageBox.Show("El usuario" + ObjUsuarioTemporal.Nombre + " se ha eliminado correctamente", "Correcto", MessageBoxButtons.OK);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Ha ocurrido un error y no se eliminó el usuario", "incorrecto", MessageBoxButtons.OK);
-
-                        }
                     }
                 }
-                else if (Continuar == DialogResult.No)
+            }
+            else if (Continuar == DialogResult.No)
+            {
+                MessageBox.Show("No se ha eliminado el Usuario", "Eliminar Usuario", MessageBoxButtons.OK);
+            }
+        }
+        private void ActivarUsuario(Logica.Models.Usuario ObjUsuarioTemporal)
+        {
+            // Solicita si se quiere eliminar el usuario realmente
+            DialogResult Continuar = MessageBox.Show("Está seguro que quiere Activar al usuario " + ObjUsuarioTemporal.Nombre, "Activación de Usuario", MessageBoxButtons.YesNo);
+
+            if (Continuar == DialogResult.Yes)
+            {
+                // Si se cumplen los datos mínimos, se procede
+                if (ObjUsuarioTemporal.IDUsuario > 0)
                 {
-                    MessageBox.Show("No se ha eliminado el Usuario", "Eliminar Usuario", MessageBoxButtons.OK);
+                    // Si el ID(o cualquier atributo obligatorio) tiene datos, se puede
+                    // asegurar que el usuario existe y se puede proceder con el delete
+
+                    if (MiUsuarioLocal.Activar())
+                    {
+                        LimpiarFormulario();
+                        LlenarListaUsuarios(CboxVerActivos.Checked);
+                        // Se muestra mensaje de éxito y se actualiza la lista
+                        MessageBox.Show("El usuario " + ObjUsuarioTemporal.Nombre + " se ha activado correctamente", "Correcto", MessageBoxButtons.OK);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ha ocurrido un error y no se activó el usuario", "Incorrecto", MessageBoxButtons.OK);
+
+                    }
                 }
+            }
+            else if (Continuar == DialogResult.No)
+            {
+                MessageBox.Show("No se ha activado el Usuario", "Activación de Usuario", MessageBoxButtons.OK);
             }
         }
 
@@ -318,7 +399,7 @@ namespace Tickets_AdrianMorales.Formularios
         {
             if (DgvListaUsusarios.SelectedRows.Count == 1)
             {
-                LimpiarFormulario();
+                LimpiarFormulario(false);
 
                 DataGridViewRow MiFila = DgvListaUsusarios.SelectedRows[0];
 
@@ -358,6 +439,7 @@ namespace Tickets_AdrianMorales.Formularios
             BtnAgregar.Enabled = true;
             BtnEliminar.Enabled = false;
             BtnModificar.Enabled = false;
+            LblPassRequerido.Visible = true;
         }
 
         private void ActivarModificaryEliminar()
@@ -365,6 +447,39 @@ namespace Tickets_AdrianMorales.Formularios
             BtnAgregar.Enabled = false;
             BtnEliminar.Enabled = true;
             BtnModificar.Enabled = true;
+            LblPassRequerido.Visible = false;
+        }
+
+        private void TxtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            // Cada vez que escribimos algo en el cuadro de texto debemos llamar al método
+            // de carga de usuarios considerando el valor de filtrado
+
+            if (!string.IsNullOrEmpty(TxtBuscar.Text.Trim()) && 
+                TxtBuscar.Text.Count() >=2 && TxtBuscar.Text!= "Buscar...")
+            {
+                LlenarListaUsuarios(CboxVerActivos.Checked, TxtBuscar.Text.Trim());
+            }
+            else
+            {
+                LlenarListaUsuarios(CboxVerActivos.Checked);
+            }
+        }
+
+        private void CboxVerActivos_Click(object sender, EventArgs e)
+        {
+            LlenarListaUsuarios(CboxVerActivos.Checked);
+
+            if (CboxVerActivos.Checked)
+            {
+                BtnEliminar.Text = "Eliminar";
+                BtnEliminar.BackColor = Color.Brown;
+            }
+            else
+            {
+                BtnEliminar.Text = "Activar";
+                BtnEliminar.BackColor = Color.BlueViolet;
+            }
         }
     }
 }

@@ -25,6 +25,7 @@ namespace Tickets_AdrianMorales.Formularios
         private void FrmMain_Load(object sender, EventArgs e)
         {
             TmrHora.Enabled = true;
+            LblUsuarioLogueado.Text = Commons.ObjetosGlobales.MiUsuarioDeSistema.Nombre;
         }
 
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
