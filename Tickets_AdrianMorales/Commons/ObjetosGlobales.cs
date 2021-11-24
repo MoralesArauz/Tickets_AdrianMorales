@@ -21,6 +21,8 @@ namespace Tickets_AdrianMorales.Commons
         // Se definen los objetos (basados en clases) que deben ser accesibles desde cualquier lugar de la aplicación
         public static Logica.Models.Usuario MiUsuarioDeSistema = new Logica.Models.Usuario();
 
+        public static Formularios.FrmUsuarioRecuperarContrasenia FormularioRecuperarContrasenia = new Formularios.FrmUsuarioRecuperarContrasenia();
+
 
         const string EmailRegex =
        @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"

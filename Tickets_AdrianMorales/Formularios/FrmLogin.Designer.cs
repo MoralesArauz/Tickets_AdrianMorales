@@ -126,6 +126,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.LblRecuperarContrasenia.TabIndex = 6;
             this.LblRecuperarContrasenia.TabStop = true;
             this.LblRecuperarContrasenia.Text = "Recuperar Contraseña";
+            this.LblRecuperarContrasenia.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LblRecuperarContrasenia_LinkClicked);
             // 
             // pictureBox1
             // 

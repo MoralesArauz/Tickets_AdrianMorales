@@ -225,14 +225,90 @@ namespace Logica.Models
             return R;
         }
 
-        public bool EnviarCodigoRecuperacion()
+        public bool EnviarCodigoRecuperacion(string CodigoVerif)
         {
-            return false;
+            bool R = false;
+
+            try
+            {
+                Conexion MyCnn = new Conexion();
+
+                MyCnn.ListadoDeParametros.Add(new SqlParameter("@Email",this.Email));
+                MyCnn.ListadoDeParametros.Add(new SqlParameter("@CodigoVerif", CodigoVerif));
+
+                int resultado = MyCnn.DMLUpdateDeleteInsert("SPUsuarioGuardarCodigoVerificacion");
+                if (resultado > 0)
+                {
+                    R = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return R;
         }
 
-        public bool CambiarPassword(int id, string nuevaContrasennia)
+
+
+        public bool ComprobarCodigoRecuperacion()
         {
-            return false;
+            bool R = false;
+
+            try
+            {
+                Conexion MyCnn = new Conexion();
+
+                MyCnn.ListadoDeParametros.Add(new SqlParameter("@Email", this.Email));
+                MyCnn.ListadoDeParametros.Add(new SqlParameter("@CodigoVerif", this.CodigoRecuperacion));
+
+                DataTable resultado = MyCnn.DMLSelect("SPUsuarioComprobarCodigoVerificacion");
+                if (resultado != null && resultado.Rows.Count > 0)
+                {
+                    R = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return R;
+        }
+
+
+        public bool CambiarPassword()
+        {
+            bool R = true;
+
+
+            try
+            {
+                Conexion MyCnn = new Conexion();
+
+                MyCnn.ListadoDeParametros.Add(new SqlParameter("@Email", this.Email));
+
+                Crypto MiEncriptador = new Crypto();
+                string contraseniaEncriptada = MiEncriptador.EncriptarEnUnSentido(this.Contrasennia);
+
+                MyCnn.ListadoDeParametros.Add(new SqlParameter("@Contrasenia",contraseniaEncriptada));
+
+                int resultado = MyCnn.DMLUpdateDeleteInsert("SPUsuarioActualizarContrasenia");
+                if (resultado > 0)
+                {
+                    R = true;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return R;
         }
 
         public Usuario ValidarIngreso(string user, string password)

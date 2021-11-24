@@ -119,5 +119,12 @@ namespace Tickets_AdrianMorales.Formularios
                 BtnIngresoDirecto.Visible = true;
             }
         }
+
+        private void LblRecuperarContrasenia_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Commons.ObjetosGlobales.FormularioRecuperarContrasenia.TxtUsuario.Text = this.TxtEmail.Text.Trim();
+
+            Commons.ObjetosGlobales.FormularioRecuperarContrasenia.Show();
+        }
     }
 }
