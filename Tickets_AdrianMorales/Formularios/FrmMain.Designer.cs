@@ -59,7 +59,7 @@ namespace Tickets_AdrianMorales.Formularios
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Gray;
+            this.menuStrip1.BackColor = System.Drawing.Color.Black;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mantenimientosToolStripMenuItem,
             this.procesosToolStripMenuItem,
@@ -103,6 +103,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.gestiónDeClientesToolStripMenuItem1.Name = "gestiónDeClientesToolStripMenuItem1";
             this.gestiónDeClientesToolStripMenuItem1.Size = new System.Drawing.Size(258, 22);
             this.gestiónDeClientesToolStripMenuItem1.Text = "Gestión de Clientes";
+            this.gestiónDeClientesToolStripMenuItem1.Click += new System.EventHandler(this.gestiónDeClientesToolStripMenuItem1_Click);
             // 
             // toolStripSeparator2
             // 
@@ -144,6 +145,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.creaciónDeTicketToolStripMenuItem.Name = "creaciónDeTicketToolStripMenuItem";
             this.creaciónDeTicketToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.creaciónDeTicketToolStripMenuItem.Text = "Creación de Ticket";
+            this.creaciónDeTicketToolStripMenuItem.Click += new System.EventHandler(this.creaciónDeTicketToolStripMenuItem_Click);
             // 
             // soluciónDeTicketsToolStripMenuItem
             // 
@@ -152,6 +154,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.soluciónDeTicketsToolStripMenuItem.Name = "soluciónDeTicketsToolStripMenuItem";
             this.soluciónDeTicketsToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
             this.soluciónDeTicketsToolStripMenuItem.Text = "Solución de Tickets";
+            this.soluciónDeTicketsToolStripMenuItem.Click += new System.EventHandler(this.soluciónDeTicketsToolStripMenuItem_Click);
             // 
             // acercaDeToolStripMenuItem
             // 

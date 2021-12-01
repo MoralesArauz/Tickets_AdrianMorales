@@ -34,9 +34,9 @@ namespace Tickets_AdrianMorales.Formularios
             this.label2 = new System.Windows.Forms.Label();
             this.CboxCategoria = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.DtpFecha = new System.Windows.Forms.DateTimePicker();
+            this.TxtTitulo = new System.Windows.Forms.TextBox();
+            this.TxtDescripcion = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.BtnAceptar = new System.Windows.Forms.Button();
@@ -45,11 +45,14 @@ namespace Tickets_AdrianMorales.Formularios
             // 
             // TxtIDUsuario
             // 
+            this.TxtIDUsuario.BackColor = System.Drawing.Color.LemonChiffon;
             this.TxtIDUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TxtIDUsuario.Location = new System.Drawing.Point(87, 16);
             this.TxtIDUsuario.Name = "TxtIDUsuario";
             this.TxtIDUsuario.Size = new System.Drawing.Size(100, 22);
             this.TxtIDUsuario.TabIndex = 0;
+            this.TxtIDUsuario.TextChanged += new System.EventHandler(this.TxtIDUsuario_TextChanged);
+            this.TxtIDUsuario.DoubleClick += new System.EventHandler(this.TxtIDUsuario_DoubleClick);
             // 
             // LblClienteNombre
             // 
@@ -57,9 +60,9 @@ namespace Tickets_AdrianMorales.Formularios
             this.LblClienteNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LblClienteNombre.Location = new System.Drawing.Point(202, 19);
             this.LblClienteNombre.Name = "LblClienteNombre";
-            this.LblClienteNombre.Size = new System.Drawing.Size(51, 16);
+            this.LblClienteNombre.Size = new System.Drawing.Size(56, 16);
             this.LblClienteNombre.TabIndex = 1;
-            this.LblClienteNombre.Text = "label1";
+            this.LblClienteNombre.Text = "Cliente";
             // 
             // label2
             // 
@@ -89,30 +92,31 @@ namespace Tickets_AdrianMorales.Formularios
             this.label3.TabIndex = 4;
             this.label3.Text = "Categoría";
             // 
-            // dateTimePicker1
+            // DtpFecha
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(568, 26);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 5;
+            this.DtpFecha.Enabled = false;
+            this.DtpFecha.Location = new System.Drawing.Point(568, 26);
+            this.DtpFecha.Name = "DtpFecha";
+            this.DtpFecha.Size = new System.Drawing.Size(200, 20);
+            this.DtpFecha.TabIndex = 5;
             // 
-            // textBox2
+            // TxtTitulo
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(15, 132);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(753, 26);
-            this.textBox2.TabIndex = 6;
+            this.TxtTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtTitulo.Location = new System.Drawing.Point(15, 132);
+            this.TxtTitulo.Name = "TxtTitulo";
+            this.TxtTitulo.Size = new System.Drawing.Size(753, 26);
+            this.TxtTitulo.TabIndex = 6;
             // 
-            // textBox3
+            // TxtDescripcion
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(15, 204);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox3.Size = new System.Drawing.Size(753, 179);
-            this.textBox3.TabIndex = 7;
+            this.TxtDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TxtDescripcion.Location = new System.Drawing.Point(15, 204);
+            this.TxtDescripcion.Multiline = true;
+            this.TxtDescripcion.Name = "TxtDescripcion";
+            this.TxtDescripcion.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.TxtDescripcion.Size = new System.Drawing.Size(753, 179);
+            this.TxtDescripcion.TabIndex = 7;
             // 
             // label4
             // 
@@ -145,6 +149,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnAceptar.TabIndex = 10;
             this.BtnAceptar.Text = "Aceptar";
             this.BtnAceptar.UseVisualStyleBackColor = false;
+            this.BtnAceptar.Click += new System.EventHandler(this.BtnAceptar_Click);
             // 
             // BtnCancelar
             // 
@@ -170,9 +175,9 @@ namespace Tickets_AdrianMorales.Formularios
             this.Controls.Add(this.BtnAceptar);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.TxtDescripcion);
+            this.Controls.Add(this.TxtTitulo);
+            this.Controls.Add(this.DtpFecha);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.CboxCategoria);
             this.Controls.Add(this.label2);
@@ -181,6 +186,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.Name = "FrmTicketCrear";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crear Ticket";
+            this.Load += new System.EventHandler(this.FrmTicketCrear_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,9 +199,9 @@ namespace Tickets_AdrianMorales.Formularios
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox CboxCategoria;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DateTimePicker DtpFecha;
+        private System.Windows.Forms.TextBox TxtTitulo;
+        private System.Windows.Forms.TextBox TxtDescripcion;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button BtnAceptar;

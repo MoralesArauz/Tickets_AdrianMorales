@@ -43,5 +43,22 @@ namespace Tickets_AdrianMorales.Formularios
 
             Commons.ObjetosGlobales.FormularioGestionDeUsuarios.Show();
         }
+
+        private void gestiónDeClientesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void creaciónDeTicketToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Commons.ObjetosGlobales.FormCrearTicket = new FrmTicketCrear();
+            Commons.ObjetosGlobales.FormCrearTicket.Show();
+        }
+
+        private void soluciónDeTicketsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Commons.ObjetosGlobales.FormAtencion = new FrmAtencionDeTickets();
+            Commons.ObjetosGlobales.FormAtencion.Show();
+        }
     }
 }

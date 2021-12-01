@@ -163,11 +163,7 @@ namespace Tickets_AdrianMorales.Formularios
                  //1.5
                  if (!OkCedula && !OkEmail)
                  {
-                    if (Commons.ObjetosGlobales.ValidarPassword(TxtContrasenia.Text))
-                    {
-                        MessageBox.Show("Contraseña válida", "Correcto", MessageBoxButtons.OK);
-                        TxtContrasenia.Focus();
-                    }
+                    
                     // Si no existe la cedula y si no existe el email, entonces agregamos el Usuario
 
                     //1.6
@@ -238,7 +234,14 @@ namespace Tickets_AdrianMorales.Formularios
 
         private void TxtContrasenia_Leave(object sender, EventArgs e)
         {
-            MiUsuarioLocal.Contrasennia = TxtContrasenia.Text.Trim(); 
+            if (Commons.ObjetosGlobales.ValidarPassword(TxtContrasenia.Text))
+            {
+                MiUsuarioLocal.Contrasennia = TxtContrasenia.Text.Trim();
+            }
+
+            MessageBox.Show("El formato de la contraseña no es correcto", "Error de Validación", MessageBoxButtons.OK);
+            TxtContrasenia.Focus();
+            TxtContrasenia.SelectAll();
         }
 
         private void CbRol_SelectionChangeCommitted(object sender, EventArgs e)

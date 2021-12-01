@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,9 +62,17 @@ namespace Logica.Models
             return false;
         }
 
-        public DataTable ListarActivos()
+        public DataTable ListarActivos(string Filtro = "")
         {
-            return null;
+            DataTable R = new DataTable();
+
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@Filtro", Filtro));
+
+            R = MiCnn.DMLSelect("SPClienteBuscar");
+
+            return R;
         }
 
         public DataTable ListarInactivos()

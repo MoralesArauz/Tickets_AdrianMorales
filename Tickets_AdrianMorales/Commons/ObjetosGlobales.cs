@@ -23,6 +23,10 @@ namespace Tickets_AdrianMorales.Commons
 
         public static Formularios.FrmUsuarioRecuperarContrasenia FormularioRecuperarContrasenia = new Formularios.FrmUsuarioRecuperarContrasenia();
 
+        public static Formularios.FrmTicketCrear FormCrearTicket = new Formularios.FrmTicketCrear();
+
+        public static Formularios.FrmAtencionDeTickets FormAtencion = new Formularios.FrmAtencionDeTickets(); 
+
 
         const string EmailRegex =
        @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
