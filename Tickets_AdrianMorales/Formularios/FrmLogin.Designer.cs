@@ -33,7 +33,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.TxtPassword = new System.Windows.Forms.TextBox();
             this.BtnIngresar = new System.Windows.Forms.Button();
             this.BtnCancelar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.LblNombre = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.LblRecuperarContrasenia = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -49,6 +49,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.TxtEmail.Size = new System.Drawing.Size(223, 22);
             this.TxtEmail.TabIndex = 0;
             this.TxtEmail.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TxtEmail.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.TxtEmail_PreviewKeyDown);
             // 
             // TxtPassword
             // 
@@ -90,17 +91,17 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnCancelar.UseVisualStyleBackColor = false;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
-            // label1
+            // LblNombre
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(118, 23);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(212, 18);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Nombre de Usuario / Email\r\n";
+            this.LblNombre.AutoSize = true;
+            this.LblNombre.BackColor = System.Drawing.Color.Transparent;
+            this.LblNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblNombre.ForeColor = System.Drawing.Color.White;
+            this.LblNombre.Location = new System.Drawing.Point(118, 23);
+            this.LblNombre.Name = "LblNombre";
+            this.LblNombre.Size = new System.Drawing.Size(212, 18);
+            this.LblNombre.TabIndex = 4;
+            this.LblNombre.Text = "Nombre de Usuario / Email\r\n";
             // 
             // label2
             // 
@@ -168,7 +169,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblRecuperarContrasenia);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LblNombre);
             this.Controls.Add(this.BtnCancelar);
             this.Controls.Add(this.BtnIngresar);
             this.Controls.Add(this.TxtPassword);
@@ -178,6 +179,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FrmLogin";
+            this.Load += new System.EventHandler(this.FrmLogin_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmLogin_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -191,7 +193,7 @@ namespace Tickets_AdrianMorales.Formularios
         private System.Windows.Forms.TextBox TxtPassword;
         private System.Windows.Forms.Button BtnIngresar;
         private System.Windows.Forms.Button BtnCancelar;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label LblNombre;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel LblRecuperarContrasenia;
         private System.Windows.Forms.PictureBox pictureBox1;

@@ -12,6 +12,8 @@ namespace Tickets_AdrianMorales.Formularios
 {
     public partial class FrmLogin : Form
     {
+        // Control del evento de combinación de teclas
+        private int secuencia = 0;
         public FrmLogin()
         {
             InitializeComponent();
@@ -117,7 +119,7 @@ namespace Tickets_AdrianMorales.Formularios
             if (e.Shift & e.KeyCode == Keys.Escape)
             {
                 BtnIngresoDirecto.Visible = true;
-            }
+            }            
         }
 
         private void LblRecuperarContrasenia_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -125,6 +127,83 @@ namespace Tickets_AdrianMorales.Formularios
             Commons.ObjetosGlobales.FormularioRecuperarContrasenia.TxtUsuario.Text = this.TxtEmail.Text.Trim();
 
             Commons.ObjetosGlobales.FormularioRecuperarContrasenia.Show();
+        }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            LblNombre.Focus();
+            this.ActiveControl = LblNombre;
+        }
+
+        // Secuencia para mostrar el boton oculto
+        // ˄˄ ˅˅ <> <> a b
+        private void TxtEmail_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+
+            switch (e.KeyCode)
+            {
+                case Keys.Up:
+                    if (secuencia == 0)
+                    {
+                        secuencia++;
+                    }
+                    else if (secuencia == 1)
+                    {
+                        secuencia++;
+                    }
+                    break;
+                case Keys.Down:
+                    if (secuencia == 2)
+                    {
+                        secuencia++;
+                    }
+                    else if (secuencia == 3)
+                    {
+                        secuencia++;
+                    }
+                    break;
+                case Keys.Left:
+                    if (secuencia == 4)
+                    {
+                        secuencia++;
+                    }
+                    else if (secuencia == 6)
+                    {
+                        secuencia++;
+                    }
+                    break;
+                case Keys.Right:
+                    if (secuencia == 5)
+                    {
+                        secuencia++;
+                    }
+                    else if (secuencia == 7)
+                    {
+                        secuencia++;
+                    }
+                    break;
+                case Keys.A:
+                    if (secuencia == 8)
+                    {
+                        secuencia++;
+                    }
+                    //MessageBox.Show("Ingresando secuencia", ":)", MessageBoxButtons.OK);
+                    break;
+                case Keys.B:
+                    if (secuencia == 9)
+                    {
+                        secuencia++;
+                    }
+                    //MessageBox.Show("Ingresando secuencia", ":)", MessageBoxButtons.OK);
+                    break;
+
+            }
+
+            if (secuencia == 10)
+            {
+                MessageBox.Show("Ingresando secuencia", ":)", MessageBoxButtons.OK);
+                secuencia = 0;
+            }
         }
     }
 }

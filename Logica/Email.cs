@@ -52,6 +52,7 @@ namespace Logica
             }
             catch (Exception ex)
             {
+                ex.GetType();
                 return false;
             }
 
