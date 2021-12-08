@@ -131,12 +131,14 @@ namespace Tickets_AdrianMorales.Formularios
 
         private void FrmLogin_Load(object sender, EventArgs e)
         {
-            LblNombre.Focus();
-            this.ActiveControl = LblNombre;
+            //LblNombre.Focus();
+            //this.ActiveControl = LblNombre;
         }
 
         // Secuencia para mostrar el boton oculto
         // ˄˄ ˅˅ <> <> a b
+        // Si no se oprime la tecla que sigue en la secuencia no se valida ni se reinicia.
+        // Se utiliza un label para ir viendo las teclas oprimidas de la secuencia
         private void TxtEmail_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
 
@@ -146,62 +148,71 @@ namespace Tickets_AdrianMorales.Formularios
                     if (secuencia == 0)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
                     else if (secuencia == 1)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
                     break;
                 case Keys.Down:
                     if (secuencia == 2)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
                     else if (secuencia == 3)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
                     break;
                 case Keys.Left:
                     if (secuencia == 4)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
                     else if (secuencia == 6)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
                     break;
                 case Keys.Right:
                     if (secuencia == 5)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
                     else if (secuencia == 7)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
                     break;
                 case Keys.A:
                     if (secuencia == 8)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
-                    //MessageBox.Show("Ingresando secuencia", ":)", MessageBoxButtons.OK);
                     break;
                 case Keys.B:
                     if (secuencia == 9)
                     {
                         secuencia++;
+                        LblSecuencia.Text += e.KeyCode.ToString();
                     }
-                    //MessageBox.Show("Ingresando secuencia", ":)", MessageBoxButtons.OK);
                     break;
 
             }
 
             if (secuencia == 10)
             {
-                MessageBox.Show("Ingresando secuencia", ":)", MessageBoxButtons.OK);
+                //MessageBox.Show("Ingresando secuencia", ":)", MessageBoxButtons.OK);
+                BtnIngresoDirecto.Visible = true;
                 secuencia = 0;
             }
         }

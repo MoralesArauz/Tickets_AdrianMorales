@@ -38,6 +38,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.LblRecuperarContrasenia = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.BtnIngresoDirecto = new System.Windows.Forms.Button();
+            this.LblSecuencia = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -157,6 +158,14 @@ namespace Tickets_AdrianMorales.Formularios
             this.BtnIngresoDirecto.Visible = false;
             this.BtnIngresoDirecto.Click += new System.EventHandler(this.BtnIngresoDirecto_Click);
             // 
+            // LblSecuencia
+            // 
+            this.LblSecuencia.AutoSize = true;
+            this.LblSecuencia.Location = new System.Drawing.Point(13, 75);
+            this.LblSecuencia.Name = "LblSecuencia";
+            this.LblSecuencia.Size = new System.Drawing.Size(0, 13);
+            this.LblSecuencia.TabIndex = 9;
+            // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,6 +174,7 @@ namespace Tickets_AdrianMorales.Formularios
             this.BackgroundImage = global::Tickets_AdrianMorales.Properties.Resources.backgroundLogin;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(449, 209);
+            this.Controls.Add(this.LblSecuencia);
             this.Controls.Add(this.BtnIngresoDirecto);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.LblRecuperarContrasenia);
@@ -198,5 +208,6 @@ namespace Tickets_AdrianMorales.Formularios
         private System.Windows.Forms.LinkLabel LblRecuperarContrasenia;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button BtnIngresoDirecto;
+        private System.Windows.Forms.Label LblSecuencia;
     }
 }
