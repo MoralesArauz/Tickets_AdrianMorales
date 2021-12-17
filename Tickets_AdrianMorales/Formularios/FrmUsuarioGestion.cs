@@ -8,6 +8,7 @@ namespace Tickets_AdrianMorales.Formularios
 {
     public partial class FrmUsuarioGestion : Form
     {
+        private bool contraseniaValida = false;
 
         // Este objeto será el que se usa para asignar y obtener los valores que
         // se mostraran en el formulario (la parte gráfica)
@@ -110,7 +111,7 @@ namespace Tickets_AdrianMorales.Formularios
             {
                 mensajeError += "Debe escoger un Rol.\n";
             }
-            if (string.IsNullOrEmpty(mensajeError))
+            if (string.IsNullOrEmpty(mensajeError) && contraseniaValida)
             {
                 // Si se cumplen los parámetros de validación se pasa el valor de R a true
                 R = true;
@@ -174,7 +175,15 @@ namespace Tickets_AdrianMorales.Formularios
                      {
                          if (MiUsuarioLocal.Agregar())
                          {
-                             MessageBox.Show("Usuario Agregado Correctamente!", "Éxito", MessageBoxButtons.OK);
+
+                            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+                            
+                            Commons.ObjetosGlobales.GuardarEnBitacora(string.Format("Se ha agregado el usuario {0} exitosamente", MiUsuarioLocal.Nombre), 
+                                Commons.ObjetosGlobales.MiUsuarioDeSistema.IDUsuario);
+
+                            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+
+                            MessageBox.Show("Usuario Agregado Correctamente!", "Éxito", MessageBoxButtons.OK);
                              //TODO: Se procede a limpiar el formulario y a recargar la lista de usuarios en el DataGrid
                              LimpiarFormulario();
                              LlenarListaUsuarios(CboxVerActivos.Checked);
@@ -234,14 +243,33 @@ namespace Tickets_AdrianMorales.Formularios
 
         private void TxtContrasenia_Leave(object sender, EventArgs e)
         {
-            if (Commons.ObjetosGlobales.ValidarPassword(TxtContrasenia.Text))
+            //
+
+            if (!string.IsNullOrEmpty(TxtContrasenia.Text.Trim()))
             {
-                MiUsuarioLocal.Contrasennia = TxtContrasenia.Text.Trim();
+
+                if (Commons.ObjetosGlobales.ValidarPassword(TxtContrasenia.Text.Trim()))
+                {
+                    MiUsuarioLocal.Contrasennia = TxtContrasenia.Text.Trim();
+                    contraseniaValida = true;
+                }
+                else
+                {
+                    contraseniaValida = false;
+                    TxtContrasenia.Focus();
+                    TxtContrasenia.SelectAll();
+                }
             }
 
-            MessageBox.Show("El formato de la contraseña no es correcto", "Error de Validación", MessageBoxButtons.OK);
-            TxtContrasenia.Focus();
-            TxtContrasenia.SelectAll();
+            ////
+            //if (Commons.ObjetosGlobales.ValidarPassword(TxtContrasenia.Text))
+            //{
+            //    MiUsuarioLocal.Contrasennia = TxtContrasenia.Text.Trim();
+            //}
+
+            //MessageBox.Show("El formato de la contraseña no es correcto", "Error de Validación", MessageBoxButtons.OK);
+            //TxtContrasenia.Focus();
+            //TxtContrasenia.SelectAll();
         }
 
         private void CbRol_SelectionChangeCommitted(object sender, EventArgs e)
@@ -289,6 +317,14 @@ namespace Tickets_AdrianMorales.Formularios
 
                         if (MiUsuarioLocal.Editar())
                         {
+
+                            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+
+                            Commons.ObjetosGlobales.GuardarEnBitacora(string.Format("Se ha editado el usuario ID: {0} exitosamente", MiUsuarioLocal.IDUsuario),
+                                Commons.ObjetosGlobales.MiUsuarioDeSistema.IDUsuario);
+
+                            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+
                             // Se muestra mensaje de éxito y se actualiza la lista
                             MessageBox.Show("El usuario se ha actualizado correctamente", "Correcto", MessageBoxButtons.OK);
 
@@ -350,6 +386,15 @@ namespace Tickets_AdrianMorales.Formularios
                     {
                         LimpiarFormulario();
                         LlenarListaUsuarios(CboxVerActivos.Checked);
+
+
+                        ////// PROCEDIMIENTOS DEL EXAMEN /////////
+
+                        Commons.ObjetosGlobales.GuardarEnBitacora(string.Format("Se ha inactivado al usuario ID: {0} exitosamente", ObjUsuarioTemporal.IDUsuario),
+                                Commons.ObjetosGlobales.MiUsuarioDeSistema.IDUsuario);
+
+                        ////// PROCEDIMIENTOS DEL EXAMEN /////////
+                        ///
                         // Se muestra mensaje de éxito y se actualiza la lista
                         MessageBox.Show("El usuario " + ObjUsuarioTemporal.Nombre + " se ha eliminado correctamente", "Correcto", MessageBoxButtons.OK);
                     }
@@ -382,6 +427,14 @@ namespace Tickets_AdrianMorales.Formularios
                     {
                         LimpiarFormulario();
                         LlenarListaUsuarios(CboxVerActivos.Checked);
+
+                        ////// PROCEDIMIENTOS DEL EXAMEN /////////
+
+                        Commons.ObjetosGlobales.GuardarEnBitacora(string.Format("Se ha activado al usuario ID: {0} exitosamente", ObjUsuarioTemporal.IDUsuario),
+                                Commons.ObjetosGlobales.MiUsuarioDeSistema.IDUsuario);
+
+                        ////// PROCEDIMIENTOS DEL EXAMEN /////////
+
                         // Se muestra mensaje de éxito y se actualiza la lista
                         MessageBox.Show("El usuario " + ObjUsuarioTemporal.Nombre + " se ha activado correctamente", "Correcto", MessageBoxButtons.OK);
                     }

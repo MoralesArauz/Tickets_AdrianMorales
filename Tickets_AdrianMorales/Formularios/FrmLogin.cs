@@ -39,6 +39,7 @@ namespace Tickets_AdrianMorales.Formularios
         {
             //TODO: Hay que validar que el usuario y la contraseña sean correctos
             //antes de mostrar el formulario principal
+            Logica.Bitacora bitacora = new Logica.Bitacora();
 
             if (ValidarDatos())
             {
@@ -50,13 +51,26 @@ namespace Tickets_AdrianMorales.Formularios
                 if (MiUsuarioValidado != null && MiUsuarioValidado.IDUsuario > 0)
                 {
                     Commons.ObjetosGlobales.MiUsuarioDeSistema = MiUsuarioValidado;
+
+                    ////// PROCEDIMIENTOS DEL EXAMEN /////////
+                    
+                    bitacora.GuardarAccionEnBitacora(string.Format("Ingreso correcto, usuario: {0}", Commons.ObjetosGlobales.MiUsuarioDeSistema.Email),
+                        Commons.ObjetosGlobales.MiUsuarioDeSistema.IDUsuario);
+
+                    ////// PROCEDIMIENTOS DEL EXAMEN /////////
+
                     // Muestro el objeto global del FrmMain
                     Commons.ObjetosGlobales.MiFormPrincipal.Show();
+
+                   
                     // Oculto (no destruyo) el formulario de login
                     this.Hide();
                 }
                 else
                 {
+                    
+                    bitacora.GuardarAccionEnBitacora(string.Format("Fallo en ingresar al sistema, se digitó mal el email o la contraseña, correo utilizado: {0}",
+                        TxtEmail.Text.Trim()));
                     MessageBox.Show("Usuario o contraseña incorrectos", "Error de Validación", MessageBoxButtons.OK);
                 }
 
@@ -108,6 +122,16 @@ namespace Tickets_AdrianMorales.Formularios
             Commons.ObjetosGlobales.MiUsuarioDeSistema.Email = "morales.arauz@gmail.com";
             Commons.ObjetosGlobales.MiUsuarioDeSistema.Nombre = "Usuario de Pruebas";
             Commons.ObjetosGlobales.MiUsuarioDeSistema.MiRol.IDUsurioRol = 1;
+
+            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+            Logica.Bitacora bitacora = new Logica.Bitacora();
+
+            bitacora.GuardarAccionEnBitacora(string.Format("Ingreso correcto, usuario: {0}", Commons.ObjetosGlobales.MiUsuarioDeSistema.Email),
+                Commons.ObjetosGlobales.MiUsuarioDeSistema.IDUsuario);
+
+            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+
+
             //muestro el objeto global del FrmMain
             Commons.ObjetosGlobales.MiFormPrincipal.Show();
             //oculto (no destruyo) el frm de Login
@@ -135,6 +159,13 @@ namespace Tickets_AdrianMorales.Formularios
             //this.ActiveControl = LblNombre;
         }
 
+
+
+        /// <summary>
+        /// Tarea 2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         // Secuencia para mostrar el boton oculto
         // ˄˄ ˅˅ <> <> a b
         // Si no se oprime la tecla que sigue en la secuencia no se valida ni se reinicia.
@@ -216,5 +247,9 @@ namespace Tickets_AdrianMorales.Formularios
                 secuencia = 0;
             }
         }
+
+        /// <summary>
+        /// Tarea 2
+        /// </summary>
     }
 }

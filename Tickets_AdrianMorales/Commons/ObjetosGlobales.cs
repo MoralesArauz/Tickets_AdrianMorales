@@ -27,7 +27,7 @@ namespace Tickets_AdrianMorales.Commons
 
         public static Formularios.FrmAtencionDeTickets FormAtencion = new Formularios.FrmAtencionDeTickets(); 
 
-
+        
         const string EmailRegex =
        @"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
        + @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?
@@ -36,7 +36,9 @@ namespace Tickets_AdrianMorales.Commons
 		[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
        + @"([a-zA-Z0-9]+[\w-]+\.)+[a-zA-Z]{1}[a-zA-Z0-9-]{1,23})$";
 
-
+        /// <summary>
+        /// Tarea 1
+        /// </summary>
         // Expresiones regulares para validar la contraseña
         static Regex tieneNumeros = new Regex(@"[0-9]+");
         static Regex extraeNumeros = new Regex(@"\d+", RegexOptions.IgnoreCase | RegexOptions.Compiled);
@@ -44,7 +46,9 @@ namespace Tickets_AdrianMorales.Commons
         static Regex limiteCaracteres = new Regex(@".{8,15}");
         static Regex tieneMinusculas = new Regex(@"[a-z]+");
         static Regex tieneSimbolos = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
-
+        /// <summary>
+        /// Tarea 1
+        /// </summary>
         public static bool ValidarEmail(string email)
         {
             if (email != null)
@@ -78,6 +82,10 @@ namespace Tickets_AdrianMorales.Commons
             return R;
         }
 
+
+        /// <summary>
+        /// Tarea 1
+        /// </summary>
         /*
             Mínimo 8 caracteres. 
             Debe tener mayúsculas. 
@@ -125,6 +133,10 @@ namespace Tickets_AdrianMorales.Commons
                 return true;
             }
         }
+        /// <summary>
+        /// Tarea 1
+        /// </summary>
+
 
 
         private static char DecimalSeparator = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator.ToString());
@@ -232,6 +244,16 @@ namespace Tickets_AdrianMorales.Commons
             return h;
         }
 
+
+        public static void GuardarEnBitacora(string accion, int IDUsuario)
+        {
+            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+            Logica.Bitacora bitacora = new Logica.Bitacora();
+            // También podría ser el nombre del usuario
+            bitacora.GuardarAccionEnBitacora(accion,IDUsuario);
+
+            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+        }
 
     }
 }

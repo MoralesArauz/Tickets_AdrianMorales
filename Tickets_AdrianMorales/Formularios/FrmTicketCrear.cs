@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -93,9 +94,37 @@ namespace Tickets_AdrianMorales.Formularios
 
                 if (MiTicket.Agregar())
                 {
+
+                    ////// PROCEDIMIENTOS DEL EXAMEN /////////
+                    
+                    Commons.ObjetosGlobales.GuardarEnBitacora("Se ha creado un nuevo Ticket",Commons.ObjetosGlobales.MiUsuarioDeSistema.IDUsuario);
+
+                    ////// PROCEDIMIENTOS DEL EXAMEN /////////
+                    ///
                     MessageBox.Show("Ticket agregado correctamente.", "Agregado", MessageBoxButtons.OK);
-                    //TODO: Implementar un reporte de crystal para poderlo imprimir y que quede
-                    //como atestado de creación del Ticket
+                    // Imprime el ticket recién agregado
+
+                    try
+                    {
+                        ReportDocument MiReporte = new ReportDocument();
+
+                        MiReporte = new Reports.RptTicket();
+
+                        MiReporte = MiTicket.Imprimir(MiReporte);
+
+                        FrmVisualizarReportes MiVisualizador = new FrmVisualizarReportes();
+
+                        MiVisualizador.CrvVisualizador.ReportSource = MiReporte;
+
+                        MiVisualizador.Show();
+                        MiVisualizador.CrvVisualizador.Zoom(1);
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+
                     LimpiarForm();
                 }
             }

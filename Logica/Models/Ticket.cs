@@ -1,5 +1,7 @@
-﻿using System;
+﻿using CrystalDecisions.CrystalReports.Engine;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -44,11 +46,16 @@ namespace Logica.Models
             MiCnn.ListadoDeParametros.Add(new SqlParameter("@IDCategoria", this.Micategoria.IDTicketCategoria));
             MiCnn.ListadoDeParametros.Add(new SqlParameter("@Titulo", this.TicketTitulo));
             MiCnn.ListadoDeParametros.Add(new SqlParameter("@Descripcion", this.TicketDescripcion));
-
-            int i = MiCnn.DMLUpdateDeleteInsert("SPTicketAgregar");
-
-            if (i > 0)
+            // Para que devuelva el ID del ticket recién agregado.
+            Object i = MiCnn.DMLConRetornoEscalar("SPTicketAgregar");
+            
+            if (i != null)
             {
+                // Hay que asignar al ID del Ticket el valor del ID creado en el SP
+                // Ya que es fundamental para la visualización del reporte.
+
+                this.IDTicket = Convert.ToInt32(i.ToString());
+                 
                 R = true;
             }
 
@@ -72,6 +79,31 @@ namespace Logica.Models
         public bool EstalecerPagado()
         {
             return false;
+        }
+
+        public ReportDocument Imprimir(ReportDocument reporte) 
+        {
+            ReportDocument R = reporte;
+
+            Crystal OCrystal = new Crystal(R);
+
+            DataTable Datos = new DataTable();
+
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListadoDeParametros.Add(new SqlParameter("@IDTicket", this.IDTicket));
+
+            Datos = MiCnn.DMLSelect("SPTicketReporte");
+
+            if (Datos != null && Datos.Rows.Count > 0)
+            {
+                // Se le asigna al reporte que diseñamos los datos que provienen del SP
+                OCrystal.Datos = Datos;
+
+                R = OCrystal.GenerarReporte();
+            }
+
+            return R;
         }
     }
 }

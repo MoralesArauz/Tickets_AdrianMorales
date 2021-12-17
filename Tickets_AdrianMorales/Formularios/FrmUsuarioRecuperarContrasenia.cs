@@ -46,6 +46,17 @@ namespace Tickets_AdrianMorales.Formularios
         {
 
 
+            if (!string.IsNullOrEmpty(TxtUsuario.Text.Trim()))
+            {
+                ////// PROCEDIMIENTOS DEL EXAMEN /////////
+                Logica.Bitacora bitacora = new Logica.Bitacora();
+
+                bitacora.GuardarAccionEnBitacora(string.Format("Se ha solicitado recuperación de contraseña para el usuario: {0}",
+                            TxtUsuario.Text.Trim()));
+
+                ////// PROCEDIMIENTOS DEL EXAMEN /////////
+            }
+
             try
             {
                 this.Cursor = Cursors.WaitCursor;
@@ -114,6 +125,8 @@ namespace Tickets_AdrianMorales.Formularios
             //1. Se debe verificar que el código digitado sea el mismo que estça almacenado en la tabla Usuario
             //2. Las contraseñas deben ser las mismas.
             //3. Se procede con el cambio de contraseña
+
+           
 
             if (!string.IsNullOrEmpty(TxtCodigoEnviado.Text.Trim()) && ValidarContrasenias())
             {

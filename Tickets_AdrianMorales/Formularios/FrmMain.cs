@@ -31,7 +31,13 @@ namespace Tickets_AdrianMorales.Formularios
         private void FrmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             //TODO: Analizar si queremos hacer un logout cuando cerramos el principal
+            ////// PROCEDIMIENTOS DEL EXAMEN /////////
+            Logica.Bitacora bitacora = new Logica.Bitacora();
+            // También podría ser el nombre del usuario
+            bitacora.GuardarAccionEnBitacora(string.Format("Cierre de sesión por parte del usuario: {0}", Commons.ObjetosGlobales.MiUsuarioDeSistema.Email),
+                Commons.ObjetosGlobales.MiUsuarioDeSistema.IDUsuario);
 
+            ////// PROCEDIMIENTOS DEL EXAMEN /////////
             Application.Exit();
         }
 
